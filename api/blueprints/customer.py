@@ -15,5 +15,5 @@ user = [
 
 
 @api_blueprint.route("user", methods=["GET"])
-def get_all_users():
+def get_all_():
     return jsonify(user)
