@@ -37,7 +37,9 @@ class UserService:
     def get(self):
         users = User.query.all()
 
-        return dict(message=users, status_code=200)
+        users_list = [user.to_dict() for user in users]
+
+        return dict(message=users_list, status_code=200)
 
     def get_by_id(self, id):
         user = User.query.filter_by(id=id).first()
