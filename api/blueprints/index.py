@@ -1,7 +1,7 @@
-from flask import jsonify
 from api.blueprints import api_blueprint
+from api.blueprints.base import base_response
 
 
 @api_blueprint.route("/", methods=["GET"])
 def index():
-    return jsonify(dict(message="WebStore API is running!"))
+    return base_response("WebStore API is running!", 200)
