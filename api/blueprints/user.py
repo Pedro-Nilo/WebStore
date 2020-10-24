@@ -2,7 +2,7 @@ from flask import jsonify
 from api.blueprints import api_blueprint
 
 
-user = [
+users = [
     {
         "name": "John",
         "email": "john@example.com"
@@ -15,5 +15,5 @@ user = [
 
 
 @api_blueprint.route("user", methods=["GET"])
-def get_all_():
-    return jsonify(user)
+def get_all_users():
+    return jsonify(users)
