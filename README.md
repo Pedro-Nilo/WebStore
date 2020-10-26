@@ -4,7 +4,7 @@ RESTFul API demo simulating a web store. Contains CRUD operations for customers,
 
 ## Database Diagram
 
-![alt text](https://github.com/Pedro-Nilo/WebStore/resource/main/database_uml.png?raw=true)
+![alt text](https://github.com/Pedro-Nilo/WebStore/blob/main/resources/database_uml.png?raw=true)
 
 ## Running on Docker enviroment
 
