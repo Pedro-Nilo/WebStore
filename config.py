@@ -1,7 +1,10 @@
 import os
+from dotenv import load_dotenv
 
 
 base_directory = os.path.abspath(os.path.dirname(__file__))
+
+load_dotenv(os.path.join(base_directory, ".flaskenv"))
 
 
 class Config(object):

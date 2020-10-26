@@ -68,7 +68,8 @@ class User(UserMixin, db.Model, BaseModel):
         return check_password_hash(self.password_hash, password)
 
     def to_dict(self):
-        return dict(id=self.id, username=self.username, email=self.email)
+        return dict(id=self.id, username=self.username, email=self.email,
+                    is_manager=self.is_manager)
 
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
