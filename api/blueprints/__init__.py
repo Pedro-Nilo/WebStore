@@ -4,4 +4,5 @@ from flask import Blueprint
 api_blueprint = Blueprint("api_blueprint", __name__)
 
 
-from api.blueprints import authentication, errors, index, token, user
+from api.blueprints import (authentication, errors,
+                            index, product, token, user)

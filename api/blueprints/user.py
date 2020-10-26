@@ -35,10 +35,10 @@ def get_users():
 def get_user_by_id(user_id):
     current_user = token_auth.current_user()
 
-    if current_user.is_manager or current_user.id == user_id:
-        result = user_service.get_by_id(user_id)
-    else:
+    if not current_user.is_manager and current_user.id != user_id:
         return base_response(401)
+
+    result = user_service.get_by_id(user_id)
 
     return base_response(result["status_code"], result["message"])
 
@@ -49,10 +49,10 @@ def update_user(user_id):
     current_user = token_auth.current_user()
 
     # Only the user himself can edit his data
-    if current_user.id == user_id:
-        result = user_service.update(user_id, request)
-    else:
+    if current_user.id != user_id:
         return base_response(401)
+
+    result = user_service.update(user_id, request)
 
     return base_response(result["status_code"], result["message"])
 
@@ -63,9 +63,9 @@ def delete_user(user_id):
     current_user = token_auth.current_user()
 
     # Manager and the user himself can delete his data
-    if current_user.is_manager or current_user.id == user_id:
-        result = user_service.delete(user_id)
-    else:
+    if not current_user.is_manager and current_user.id != user_id:
         return base_response(401)
+
+    result = user_service.delete(user_id)
 
     return base_response(result["status_code"], result["message"])
