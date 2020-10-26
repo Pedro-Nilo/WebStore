@@ -9,7 +9,7 @@ class Order(db.Model, BaseModel):
     request_date = db.Column(db.DateTime, index=True, default=datetime.utcnow,
                              nullable=False)
     price = db.Column(db.DECIMAL(5, 2), default=0.00, nullable=False)
-    status = db.Column(db.BOOLEAN,  nullable=False)
+    status = db.Column(db.BOOLEAN, nullable=False)
     client_id = db.Column(db.ForeignKey("user.id"))
 
     order_items = db.relationship("OrderItem", backref="order", lazy="dynamic")
