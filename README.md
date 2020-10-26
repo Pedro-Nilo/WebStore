@@ -2,6 +2,10 @@
 
 RESTFul API demo simulating a web store. Contains CRUD operations for customers, products and orders.
 
+## Database Diagram
+
+![alt text](https://github.com/Pedro-Nilo/WebStore/resource/main/database_uml.png?raw=true)
+
 ## Running on Docker enviroment
 
 To running this project on Docker environment you will needs [Docker](https://www.docker.com/) v19.03.8+ and [Docker-Compose](https://docs.docker.com/compose/) v1.25.5+.

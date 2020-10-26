@@ -6,7 +6,7 @@ from sqlalchemy.orm import validates
 class OrderItem(db.Model, BaseModel):
     __tablename__ = "order_item"
 
-    request_quantity = db.Column(db.Integer, default=0, nullable=False)
+    request_quantity = db.Column(db.Integer, default=1, nullable=False)
     item_price = db.Column(db.DECIMAL(5, 2), default=0.01, nullable=False)
     order_id = db.Column(db.ForeignKey("order.id"))
     product_id = db.Column(db.ForeignKey("product.id"))
@@ -16,7 +16,7 @@ class OrderItem(db.Model, BaseModel):
         if not item_price:
             raise AssertionError("No price provided")
 
-        if item_price <= 0.00:
+        if item_price <= 0.01:
             raise AssertionError(
                 "Price must be a positive non-zero decimal")
 
@@ -27,7 +27,7 @@ class OrderItem(db.Model, BaseModel):
         if not request_quantity:
             raise AssertionError("No quantity provided")
 
-        if request_quantity < 0:
+        if request_quantity <= 0:
             raise AssertionError(
                 "Quantity must be a positive non-zero integer")
 
@@ -38,5 +38,5 @@ class OrderItem(db.Model, BaseModel):
 
     def to_dict(self):
         return dict(id=self.id, product_id=self.product_id,
-                    order_id=self.order_id, item_price=self.item_price,
+                    order_id=self.order_id, item_price=str(self.item_price),
                     quantity=self.request_quantity)

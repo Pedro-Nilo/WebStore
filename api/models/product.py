@@ -36,12 +36,9 @@ class Product(db.Model, BaseModel):
 
     @validates("stock")
     def validate_stock(self, key, stock):
-        if not stock:
-            raise AssertionError("No stock provided")
-
         if stock < 0:
             raise AssertionError(
-                "Stock must be a positive non-zero integer")
+                "Stock must be a positive integer")
 
         return stock
 

@@ -7,10 +7,11 @@ from sqlalchemy.orm import validates
 class Order(db.Model, BaseModel):
     __tablename__ = "order"
 
-    request_date = db.Column(db.DateTime, index=True, default=datetime.utcnow,
+    request_date = db.Column(db.DateTime, index=True, default=datetime.now,
                              nullable=False)
-    price = db.Column(db.DECIMAL(5, 2), default=0.01, nullable=False)
-    status = db.Column(db.BOOLEAN, nullable=False)
+    price = db.Column(db.DECIMAL(5, 2), default=0.00, nullable=False)
+    status = db.Column(db.BOOLEAN, nullable=False, default=True)
+    reason = db.Column(db.String(255), nullable=True)
     client_id = db.Column(db.ForeignKey("user.id"))
 
     order_items = db.relationship("OrderItem", backref="order", lazy="dynamic")
@@ -20,9 +21,9 @@ class Order(db.Model, BaseModel):
         if not price:
             raise AssertionError("No price provided")
 
-        if price <= 0.00:
+        if price < 0.00:
             raise AssertionError(
-                "Price must be a positive non-zero decimal")
+                "Price must be a positive decimal")
 
         return price
 
@@ -39,5 +40,6 @@ class Order(db.Model, BaseModel):
             status = "Canceled"
 
         return dict(id=self.id, client_id=self.client_id,
-                    request_date=self.request_date, total=self.price,
-                    status=status, order_items=order_items_list)
+                    request_date=self.request_date, total=str(self.price),
+                    status=status, reason=self.reason,
+                    order_items=order_items_list)

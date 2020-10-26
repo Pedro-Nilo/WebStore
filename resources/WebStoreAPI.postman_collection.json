@@ -1,0 +1,814 @@
+{
+	"info": {
+		"_postman_id": "b37945a3-f3c1-434f-bcf1-ffd8b7b71f8d",
+		"name": "WebStoreAPI",
+		"description": "Collection to testing WebStore API Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TokenActions",
+			"item": [
+				{
+					"name": "get_token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Kevin1990!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "Kevin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/token",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"token"
+							]
+						},
+						"description": "After create user, clients must call this endpoint in order to obtain token to security access of API"
+					},
+					"response": []
+				},
+				{
+					"name": "revoke_token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "HreqQlcwF9rGSXHZamvoEHJRa7Rzan6i",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/token",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"token"
+							]
+						},
+						"description": "Revoke a user token"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to manipulate tokens",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1da38275-32a9-471a-b3a9-d6a8b8011d78",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0792e98c-f0e2-4dca-82f7-fe0646aac626",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UserActions",
+			"item": [
+				{
+					"name": "add_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Kevin\",\r\n    \"password\": \"Kevin1990!\",\r\n    \"email\": \"kevin@example.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						},
+						"description": "Request to add a client to webstore"
+					},
+					"response": []
+				},
+				{
+					"name": "get_users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "O8Kl6WRwFnp06HlFo2+VUVnZa17EdzQX",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						},
+						"description": "Get all users from webstore"
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_by_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ssf7Ap3EC0r59qgHDpLhZcjIW0bVgXwO",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/user/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Get a user given ID. If user is not a manager, he can only retrieve his own information."
+					},
+					"response": []
+				},
+				{
+					"name": "update_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ssf7Ap3EC0r59qgHDpLhZcjIW0bVgXwO",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"ChangeThisNow2020!\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/user/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Update user information. Apply only to email and password fields"
+					},
+					"response": []
+				},
+				{
+					"name": "delete_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "ssf7Ap3EC0r59qgHDpLhZcjIW0bVgXwO",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/user/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Delete a user from WebStore"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to manipulate users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7699a157-abe0-4bb7-b96c-8260fff26efc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "92260730-2a63-4859-b8a2-5dd31aeb6f48",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ProductActions",
+			"item": [
+				{
+					"name": "add_product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "XJGL8ZLW+wkzyM2B0f8b0Z9HqB7IVNw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Product3\",\r\n    \"price\": \"7,23\",\r\n    \"stock\": \"120\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product"
+							]
+						},
+						"description": "Request to add a product to webstore. Only manager can add new products"
+					},
+					"response": []
+				},
+				{
+					"name": "get_products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sg7ZscD1gghveIybULFgGneVFfugdIID",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product"
+							]
+						},
+						"description": "Get all products from webstore"
+					},
+					"response": []
+				},
+				{
+					"name": "get_product_by_name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "hamapaT/wsf6AVCdgqA9kcoVSlfMBS2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/product/{{product_name}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{product_name}}"
+							]
+						},
+						"description": "Get a product information given his name."
+					},
+					"response": []
+				},
+				{
+					"name": "update_product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "mAO35EaALsQeaOvxWG9BF1XnUZ5lr8EI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stock\": \"400\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/product/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{product_id}}"
+							]
+						},
+						"description": "Update product information. Apply only to price and stock fields"
+					},
+					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "hamapaT/wsf6AVCdgqA9kcoVSlfMBS2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/product/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{product_id}}"
+							]
+						},
+						"description": "Delete a product from WebStore"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to manipulate products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "87f43906-cc61-4c5c-92fb-3ae9308c60a4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c6f82fb-7d7e-4c1e-9c4a-e97c486771e0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OrderActions",
+			"item": [
+				{
+					"name": "make_order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sg7ZscD1gghveIybULFgGneVFfugdIID",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Product2\",\r\n            \"quantity\": \"1\"\r\n        },\r\n        {\r\n            \"product_name\": \"Product4\",\r\n            \"quantity\": \"1\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						},
+						"description": "Request to add a product to webstore. Only manager can add new products"
+					},
+					"response": []
+				},
+				{
+					"name": "get_orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sg7ZscD1gghveIybULFgGneVFfugdIID",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						},
+						"description": "Get all orders from webstore"
+					},
+					"response": []
+				},
+				{
+					"name": "get_order_by_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "j0K/qvV4bVIx2xc9ji8Q0ZIU4JBzqRLH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/order/{{order_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"{{order_id}}"
+							]
+						},
+						"description": "Get a order information given his ID. Clients can see only his own orders"
+					},
+					"response": []
+				},
+				{
+					"name": "get_order_by_client_id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "sg7ZscD1gghveIybULFgGneVFfugdIID",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1/api/v1/order/client/{{client_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"client",
+								"{{client_id}}"
+							]
+						},
+						"description": "Get a order information given his client ID. Clients can see only his own orders"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to manipulate orders",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "16e01010-b816-4c8e-8237-794b1d8988e5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ec3fded-70b3-408e-be88-30bfd88762f6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "check_api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/api/v1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"api",
+						"v1"
+					]
+				},
+				"description": "Check if API is up and running"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

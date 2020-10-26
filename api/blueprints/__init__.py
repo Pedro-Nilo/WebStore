@@ -5,4 +5,4 @@ api_blueprint = Blueprint("api_blueprint", __name__)
 
 
 from api.blueprints import (authentication, errors,
-                            index, product, token, user)
+                            index, order, product, token, user)
